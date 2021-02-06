@@ -3,6 +3,7 @@ pipeline {
 	environment {
 		DOCKER_HUB_REPO = "vakkasoglu/capstone-project"
 		CONTAINER_NAME = "capstone-project"
+		REGISTRY_CREDENTIAL = "dockerhub"
 
 	}
 	stages {
