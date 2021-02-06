@@ -18,6 +18,9 @@ pipeline {
 			steps {
 				script {
 					sh 'git clone https://github.com/mvakkasoglu/Boston_casestudy_part_1.git'
+				}
+			}
+		}
 		stage('Build docker image') {
 			steps {
 				script {
@@ -29,16 +32,16 @@ pipeline {
 			}
 		}
 		stage('Push docker image') {
-			steps {
-			    script {
-				    dir('./Boston_casestudy_part_1') {
-					    docker.withRegistry( '', REGISTRY_CREDENTIAL ) {
-				            sh 'docker push vakkasoglu/capstone-project:$BUILD_NUMBER'
-				            sh 'docker push vakkasoglu/capstone-project:latest'
-			            }
-					}
-				}
-			}
+		    steps {
+			      script {
+				        dir('./Boston_casestudy_part_1') {
+				            docker.withRegistry( '', REGISTRY_CREDENTIAL ) {
+				                sh 'docker push vakkasoglu/capstone-project:$BUILD_NUMBER'
+				                sh 'docker push vakkasoglu/capstone-project:latest'
+			                }
+					      }
+				    }
+			  }
 		}
 		stage('Deploy to kubernetes') {
 			steps {
@@ -49,3 +52,5 @@ pipeline {
 				}
 			}
 		}
+	}
+}
